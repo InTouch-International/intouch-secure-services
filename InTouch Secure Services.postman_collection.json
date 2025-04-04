@@ -1,0 +1,821 @@
+{
+	"info": {
+		"_postman_id": "ae75974b-62f8-4d48-8ce6-95b099870b88",
+		"name": "InTouch Secure Services",
+		"description": "Requests using pre-populated sample information to obtain enrichment data.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30708145",
+		"_collection_link": "https://intouch-io.postman.co/workspace/fa283ef9-a336-4391-b1e5-ebebaf028cc8/collection/30708145-ae75974b-62f8-4d48-8ce6-95b099870b88?action=share&source=collection_link&creator=30708145"
+	},
+	"item": [
+		{
+			"name": "Authorisation",
+			"item": [
+				{
+					"name": "Get Authorisation Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{auth_url}}/token",
+							"host": [
+								"{{auth_url}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pre-Run File Upload",
+			"item": [
+				{
+					"name": "Upload Single File",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Files",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Secure Data Services",
+			"item": [
+				{
+					"name": "South African Department of Home Affairs Verification + Identity Photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=bdd053aa-239b-4f4c-96e3-425fc5a165a8&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "bdd053aa-239b-4f4c-96e3-425fc5a165a8"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								},
+								{
+									"key": "EnquiryReason",
+									"value": "Test"
+								},
+								{
+									"key": "EnquiryDoneBy",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Identity Verification via South African Credit Bureaus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=392595a7-8297-4063-98df-4cf831ca0720&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&FirstName=Christopher&Surname=Burger&UsePP=false&UseDHAExtra=No&DOB=1977-07-07",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "392595a7-8297-4063-98df-4cf831ca0720"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "FirstName",
+									"value": "Christopher"
+								},
+								{
+									"key": "Surname",
+									"value": "Burger"
+								},
+								{
+									"key": "UsePP",
+									"value": "false"
+								},
+								{
+									"key": "UseDHAExtra",
+									"value": "No"
+								},
+								{
+									"key": "DOB",
+									"value": "1977-07-07"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Best Address -  provides current highest scoring addresses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=01931fe0-32f8-74b4-812e-c90ab6b57ab3&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&UseRankedScore=True",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "01931fe0-32f8-74b4-812e-c90ab6b57ab3"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "UseRankedScore",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact-ability (Provides current highest scoring Cell phone and Telephone Numbers)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=9cb441e9-cb3a-456b-b0f4-6d6920c29540&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&AddNames=true&GetOwnerName=true&ShowLinks=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "9cb441e9-cb3a-456b-b0f4-6d6920c29540"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "AddNames",
+									"value": "true"
+								},
+								{
+									"key": "GetOwnerName",
+									"value": "true"
+								},
+								{
+									"key": "ShowLinks",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eKYC Individual – submit identity and existing Address for Verification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let inputPerson = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
+									"let inputAddress = encodeURIComponent('{\"Line1\": \"Bureau Place\", \"PostCode\": \"2194\"}');",
+									"pm.environment.set(\"inputPerson\", inputPerson);",
+									"pm.environment.set(\"inputAddress\", inputAddress);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=eca10fd3-791d-4d3e-a3a7-b5ca57b67968&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&InputPerson={{inputPerson}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eca10fd3-791d-4d3e-a3a7-b5ca57b67968"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								},
+								{
+									"key": "EnquiryReason",
+									"value": "Test"
+								},
+								{
+									"key": "EnquiryDoneBy",
+									"value": ""
+								},
+								{
+									"key": "InputPerson",
+									"value": "{{inputPerson}}",
+									"description": "Value editable in Scripts"
+								},
+								{
+									"key": "InputAddress",
+									"value": "{{inputAddress}}",
+									"description": "Optional, Value editable in Scripts",
+									"disabled": true
+								},
+								{
+									"key": "InputEmail",
+									"value": "",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "InputTelephone",
+									"value": "",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "InputEmployer",
+									"value": "",
+									"description": "Optional",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "South African Bank Account Verification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=a81c2585-5ab6-460c-ae47-782015c1805b&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&AccountNumber=&FirstName=&Surname=&IdentificationType=&Bank=&HasConsent=true&AccountType=NotKnown&BranchCode=",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a81c2585-5ab6-460c-ae47-782015c1805b"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Fraud Detection and Prevention"
+								},
+								{
+									"key": "IDNumber",
+									"value": ""
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								},
+								{
+									"key": "EnquiryReason",
+									"value": "Test"
+								},
+								{
+									"key": "EnquiryDoneBy",
+									"value": ""
+								},
+								{
+									"key": "AccountNumber",
+									"value": ""
+								},
+								{
+									"key": "FirstName",
+									"value": ""
+								},
+								{
+									"key": "Surname",
+									"value": ""
+								},
+								{
+									"key": "IdentificationType",
+									"value": ""
+								},
+								{
+									"key": "Bank",
+									"value": ""
+								},
+								{
+									"key": "HasConsent",
+									"value": "true"
+								},
+								{
+									"key": "AccountType",
+									"value": "NotKnown"
+								},
+								{
+									"key": "BranchCode",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=fbfdb214-8d5b-417e-b49b-7afb0c0d7b78&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&FirstName=Joseph&MiddleName=&LastName=Kony&MatchType=Exact&Gender=Male&IncludeDeceasedPersons=No",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "fbfdb214-8d5b-417e-b49b-7afb0c0d7b78"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Fraud Detection and Prevention"
+								},
+								{
+									"key": "IDNumber",
+									"value": ""
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								},
+								{
+									"key": "EnquiryReason",
+									"value": "Test"
+								},
+								{
+									"key": "EnquiryDoneBy",
+									"value": ""
+								},
+								{
+									"key": "FirstName",
+									"value": "Joseph"
+								},
+								{
+									"key": "MiddleName",
+									"value": ""
+								},
+								{
+									"key": "LastName",
+									"value": "Kony"
+								},
+								{
+									"key": "MatchType",
+									"value": "Exact"
+								},
+								{
+									"key": "CloseMatchThreshold",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "OriginalScriptName",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "Address",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "Gender",
+									"value": "Male"
+								},
+								{
+									"key": "DateOfBirth",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "IncludeDeceasedPersons",
+									"value": "No"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company KYC (CIPC Company Check and Director Information)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let inputDirectorList = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
+									"pm.environment.set(\"inputDirectorList\", inputDirectorList);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=0c4fb641-f410-4f2e-b06e-d43ea8a94e54&PermissiblePurpose=Fraud Detection and Prevention&RegistrationNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&CompanyName=",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0c4fb641-f410-4f2e-b06e-d43ea8a94e54"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Fraud Detection and Prevention"
+								},
+								{
+									"key": "RegistrationNumber",
+									"value": ""
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								},
+								{
+									"key": "EnquiryReason",
+									"value": "Test"
+								},
+								{
+									"key": "EnquiryDoneBy",
+									"value": ""
+								},
+								{
+									"key": "CompanyName",
+									"value": ""
+								},
+								{
+									"key": "InputDirectorList",
+									"value": "{{inputDirectorList}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eagle Eye (Pre-Assessment Credit Check Enquiry)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}?id=da065595-12ae-448a-b6ed-818437cbb098&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "da065595-12ae-448a-b6ed-818437cbb098"
+								},
+								{
+									"key": "PermissiblePurpose",
+									"value": "Admin Purpose"
+								},
+								{
+									"key": "IDNumber",
+									"value": "7707077777087"
+								},
+								{
+									"key": "Reference",
+									"value": "Test"
+								},
+								{
+									"key": "MaxCacheDays",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Secure Biometric and Identity Document Services",
+			"item": [
+				{
+					"name": "OCR",
+					"item": [
+						{
+							"name": "Identity Document Capture and Extract",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "UseV2",
+										"value": "true",
+										"type": "text"
+									},
+									{
+										"key": "DocumentType",
+										"value": "IDCARD",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"FrontImage\": \"\",\n    \"BackImage\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/files?id=abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"files"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Face Compare",
+					"item": [
+						{
+							"name": "Compare Images (Facial Match)",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"target\": \"\",\n    \"faces\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/files?id=90c11897-f2a1-4e9b-9107-1382ced5490f",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"files"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "90c11897-f2a1-4e9b-9107-1382ced5490f"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Liveness",
+					"item": [
+						{
+							"name": "Selfie Liveness Verification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "UseV3",
+										"value": "true",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"media\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/files?id=37f83569-9db3-4f5a-8303-b56f42a632ca",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"files"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "37f83569-9db3-4f5a-8303-b56f42a632ca"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
