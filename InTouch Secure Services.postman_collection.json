@@ -1,13 +1,940 @@
 {
 	"info": {
-		"_postman_id": "ae75974b-62f8-4d48-8ce6-95b099870b88",
-		"name": "InTouch Secure Services",
-		"description": "Requests using pre-populated sample information to obtain enrichment data.",
+		"_postman_id": "cdf21776-c5cd-4c84-8126-814cb783f341",
+		"name": "InTouch Secure Services with consent",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30708145",
-		"_collection_link": "https://intouch-io.postman.co/workspace/fa283ef9-a336-4391-b1e5-ebebaf028cc8/collection/30708145-ae75974b-62f8-4d48-8ce6-95b099870b88?action=share&source=collection_link&creator=30708145"
+		"_exporter_id": "30709642",
+		"_collection_link": "https://intouch-io.postman.co/workspace/InTouch-Library-Services~fa283ef9-a336-4391-b1e5-ebebaf028cc8/collection/30709642-cdf21776-c5cd-4c84-8126-814cb783f341?action=share&source=collection_link&creator=30709642"
 	},
 	"item": [
+		{
+			"name": "Consent",
+			"item": [
+				{
+					"name": "Consent linked documentation",
+					"item": [
+						{
+							"name": "Consent Document Download",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/document/{{org_phase_two_id}}/{{consent_request_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"document",
+										"{{org_phase_two_id}}",
+										"{{consent_request_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Download support documentation for your requests."
+				},
+				{
+					"name": "Email Consent",
+					"item": [
+						{
+							"name": "Email Only",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"EMAIL_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Overide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"callBackUrl\": \"\", //This is the link our system can notify your system via a post call. \n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"EMAIL_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"overide\": true, // Overide our default messages with your own if the shortand configuration allows it\n    \"overideMessage\": \"Please give consent\", // This is the message you will be overiding with. \n    \"overideHeading\": \"Heading\", // This is the email heading you will be overiding with\n    \"overideSubject\": \"Subject\" // This is the email subject you will be overiding with. \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email with webhook",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"callBackUrl\": \"\", //This is the link our system can notify your system via a post call. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"EMAIL_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email with workflows",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"EMAIL_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"workflowToTrigger\": [\n        \"\"\n    ] // List of ids to run once request is consented to.\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Send consent to your clients through InTouch via email with different methods."
+				},
+				{
+					"name": "SMS Consent",
+					"item": [
+						{
+							"name": "Sms Only",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"SMS_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SMS Overide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"SMS_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"overide\": true, // Overide our default messages with your own if the shortand configuration allows it\n    \"overideMessage\": \"Please give consent\" // This is the message you will be overiding with. \n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SMS Webhook",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"callBackUrl\": \"\", //This is the link our system can notify your system via a post call. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"SMS_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SMS Workflows",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"SMS_GENERIC_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"workflowToTrigger\": [\n        \"\"\n    ] // List of ids to run once request is consented to.\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Send consent to your clients through InTouch via sms with different methods."
+				},
+				{
+					"name": "Dynamic Consent",
+					"item": [
+						{
+							"name": "Dynamic Only",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"MULTI_CHANNEL_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Dynamic Overide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"MULTI_CHANNEL_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"overide\": true, // Overide our default messages with your own if the shortand configuration allows it\n    \"overideMessage\": \"Please give consent\", // This is the message you will be overiding with. \n    \"overideHeading\": \"Heading\", // This is the email heading you will be overiding with\n    \"overideSubject\": \"Subject\" // This is the email subject you will be overiding with. \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Dynamic Webhook",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"callBackUrl\": \"\", //This is the link our system can notify your system via a post call. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"MULTI_CHANNEL_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Dynamic Workflows",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\", //User email you want to send consent to,\n    \"phoneNumber\": \"\", // Phone number to send consent request to. \n    \"terms_link\": \"/consent/client-agreement\", // constant for Intouch general consent but can be overidden to be your terms url\n    \"retryTotal\": 3, // We keep retrying to send a message based on if a user responded or not. \n    \"selfie_required\": false, // Do you require a selfie image for next steps of request. \n    \"shortHand\": \"MULTI_CHANNEL_LINK\", // This is a constant to intouch consent types that will send an email with the action being a link. \n    \"metaData\": { //This metdata can be used for your own internal use or ours. This data would have data regarding your callback response, as well as objects needed if you wish to run workflows from our system. Or if you wish to keep custom track of the request using some internal data.\n        \"example\": \"example\"\n    },\n    \"workflowToTrigger\": [\n        \"\"\n    ] // List of ids to run once request is consented to.\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Send consent to your clients through InTouch via email and sms with different methods."
+				},
+				{
+					"name": "Consent Results",
+					"item": [
+						{
+							"name": "Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/status/{{org_phase_two_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"status",
+										"{{org_phase_two_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Full status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/status/{{org_phase_two_id}}/{{consent_request_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"status",
+										"{{org_phase_two_id}}",
+										"{{consent_request_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Helpers",
+					"item": [
+						{
+							"name": "Consent Types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{consent_base_url}}/consent/api/v1/request/types",
+									"host": [
+										"{{consent_base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Type using a contact method",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{consent_base_url}}/consent/api/v1/request/types/sms",
+									"host": [
+										"{{consent_base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"types",
+										"sms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rerequest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request/rerequest/{{org_phase_two_id}}/{{consent_request_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request",
+										"rerequest",
+										"{{org_phase_two_id}}",
+										"{{consent_request_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"consentRequestId\": \"{{consent_request_id}}\",\n    \"organisationId\": \"{{org_phase_two_id}}\",\n    \"phoneNumber\": {{$randomPhoneNumber}},\n    \"email\": \"{{$randomEmail}}\",\n    \"callBackUrl\": \"\",\n    \"customerRef\": null,\n    \"metaData\": {\n        \"someField\": \"\"\n    },\n    \"workflowsRun\": null,\n    \"preferedCommunication\": null,\n    \"createdAt\": \"2025-04-13 21:26:47\",\n    \"updateAt\": null,\n    \"lastRequestTried\": null,\n    \"selfie_required\": false,\n    \"terms_link\": \"/consent/client-agreement\",\n    \"pdf_link\": \"\",\n    \"shortHand\": \"EMAIL_GENERIC_LINK\",\n    \"notes\": \"Advisor called client themselves\",\n    \"response\": \"yes\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/consent/api/v1/request",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"consent",
+										"api",
+										"v1",
+										"request"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "### Consent initiation and records\n\n- **Initiation Calls**: Using your Organisation ID, you can initiate a consent request. These calls generate a `Consent Request ID`, which is used to keep track of the status of a consent request. The three types are SMS Email and Both (Dynamic) All these includes links to our internal systems.\n    \n- **Status Checks**: By inputting the `Consent Request ID` as a path variable in the status call, you can obtain real-time updates on the request. We have two status codes the one is without auth incase you want to show your consent request to the user who is not in our system. The other you can get a more detailed view with.\n    \n- **Helper methods:** Allows you to update and rerequest your requests. Along with getting more information from our system with the configuration types we have on offer.\n    \n- **Documentation**: InTouch generated a document as proof of consent that can be downloaded for consent requests.\n    \n\n### Environment Variables Collection\n\nThis collection includes crucial configurations, such as:\n\n- **Base URLs**: URLs for authentication, identity services, core services, and workflow initiation.\n    \n- **Authentication Token**: Placeholder for the Bearer token necessary for authenticated calls.\n    \n- **Organisation Phase Two ID**: Identifier used in initiating workflows."
+		},
+		{
+			"name": "InTouch Workflow Services",
+			"item": [
+				{
+					"name": "Check Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/status/{{tracking_id}}",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"status",
+								"{{tracking_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"Fraud Detection and Prevention\" // default value\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}/initiateWorkflow?workflowId=daaf29ca-3451-4f44-a311-4fa156a41940&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"path": [
+								"initiateWorkflow"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "daaf29ca-3451-4f44-a311-4fa156a41940"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact-ability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}/initiateWorkflow?workflowId=4166a792-cee9-4350-8de4-c51ffe1919f5&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"path": [
+								"initiateWorkflow"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "4166a792-cee9-4350-8de4-c51ffe1919f5"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eKYC Individual",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"Test\"\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"Will be provided on demand\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"Karl Nimmo\"\n    },\n    {\n        \"name\": \"InputPerson\",\n        \"value\": \"{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"9103085067083\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Karl\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Nimmo\\\\\\\"}\" // please adhere to escapes\n    },\n    {\n        \"name\": \"InputAddress\",\n        \"value\": \"{\\\\\\\"Line1\\\\\\\":\\\\\\\"34 Cecil Avenue\\\\\\\",\\\\\\\"PostCode\\\\\\\":\\\\\\\"2196\\\\\\\"}\" // please adhere to escapes\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}/initiateWorkflow?workflowId=f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"path": [
+								"initiateWorkflow"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "### Workflow Initiation and Tracking\n\n- **Initiation Calls**: Using your Organisation ID, you can initiate any workflow process. These calls generate a `Tracking ID`, which is essential for monitoring the workflow's progress.\n    \n- **Status Checks**: By inputting the `Tracking ID` as a path variable in the status call, you can obtain real-time updates on the workflow. This includes results for each step as they are completed.\n    \n- **Handling Encoded Data**: If a call returns encoded data, the workflow will decode this data and upload the corresponding document or image to a private S3 bucket. You'll receive a document or image URL in your results, equipped with a secure, pre-signed link for access. Note that these links expire after 24 hours for security purposes.\n    \n\n### Environment Variables Collection\n\nThis collection includes crucial configurations, such as:\n\n- **Base URLs**: URLs for authentication, identity services, core services, and workflow initiation.\n    \n- **Authentication Token**: Placeholder for the Bearer token necessary for authenticated calls.\n    \n- **Organisation Phase Two ID**: Identifier used in initiating workflows."
+		},
+		{
+			"name": "Pre-Run File Upload",
+			"item": [
+				{
+					"name": "Upload Single File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Files",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "frontImage",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "backImage",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Authorisation",
 			"item": [
@@ -50,309 +977,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Pre-Run File Upload",
-			"item": [
-				{
-					"name": "Upload Single File",
-					"request": {
-						"method": "POST",
-						"header": []
-					},
-					"response": []
 				},
 				{
-					"name": "Upload Files",
-					"request": {
-						"method": "POST",
-						"header": []
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Secure Data Services",
-			"item": [
-				{
-					"name": "South African Department of Home Affairs Verification + Identity Photo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=bdd053aa-239b-4f4c-96e3-425fc5a165a8&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "bdd053aa-239b-4f4c-96e3-425fc5a165a8"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								},
-								{
-									"key": "EnquiryReason",
-									"value": "Test"
-								},
-								{
-									"key": "EnquiryDoneBy",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Identity Verification via South African Credit Bureaus",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=392595a7-8297-4063-98df-4cf831ca0720&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&FirstName=Christopher&Surname=Burger&UsePP=false&UseDHAExtra=No&DOB=1977-07-07",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "392595a7-8297-4063-98df-4cf831ca0720"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "FirstName",
-									"value": "Christopher"
-								},
-								{
-									"key": "Surname",
-									"value": "Burger"
-								},
-								{
-									"key": "UsePP",
-									"value": "false"
-								},
-								{
-									"key": "UseDHAExtra",
-									"value": "No"
-								},
-								{
-									"key": "DOB",
-									"value": "1977-07-07"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Best Address -  provides current highest scoring addresses",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=01931fe0-32f8-74b4-812e-c90ab6b57ab3&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&UseRankedScore=True",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "01931fe0-32f8-74b4-812e-c90ab6b57ab3"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "UseRankedScore",
-									"value": "True"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Contact-ability (Provides current highest scoring Cell phone and Telephone Numbers)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=9cb441e9-cb3a-456b-b0f4-6d6920c29540&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&AddNames=true&GetOwnerName=true&ShowLinks=true",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "9cb441e9-cb3a-456b-b0f4-6d6920c29540"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "AddNames",
-									"value": "true"
-								},
-								{
-									"key": "GetOwnerName",
-									"value": "true"
-								},
-								{
-									"key": "ShowLinks",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "eKYC Individual – submit identity and existing Address for Verification",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let inputPerson = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
-									"let inputAddress = encodeURIComponent('{\"Line1\": \"Bureau Place\", \"PostCode\": \"2194\"}');",
-									"pm.environment.set(\"inputPerson\", inputPerson);",
-									"pm.environment.set(\"inputAddress\", inputAddress);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=eca10fd3-791d-4d3e-a3a7-b5ca57b67968&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&InputPerson={{inputPerson}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "eca10fd3-791d-4d3e-a3a7-b5ca57b67968"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								},
-								{
-									"key": "EnquiryReason",
-									"value": "Test"
-								},
-								{
-									"key": "EnquiryDoneBy",
-									"value": ""
-								},
-								{
-									"key": "InputPerson",
-									"value": "{{inputPerson}}",
-									"description": "Value editable in Scripts"
-								},
-								{
-									"key": "InputAddress",
-									"value": "{{inputAddress}}",
-									"description": "Optional, Value editable in Scripts",
-									"disabled": true
-								},
-								{
-									"key": "InputEmail",
-									"value": "",
-									"description": "Optional",
-									"disabled": true
-								},
-								{
-									"key": "InputTelephone",
-									"value": "",
-									"description": "Optional",
-									"disabled": true
-								},
-								{
-									"key": "InputEmployer",
-									"value": "",
-									"description": "Optional",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "South African Bank Account Verification",
+					"name": "Get Organisation Phase Two ID",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -364,284 +991,16 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}?id=a81c2585-5ab6-460c-ae47-782015c1805b&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&AccountNumber=&FirstName=&Surname=&IdentificationType=&Bank=&HasConsent=true&AccountType=NotKnown&BranchCode=",
+							"raw": "{{identity_url}}/inTouchOrganisation/organisationPhaseTwoId",
 							"host": [
-								"{{base_url}}"
+								"{{identity_url}}"
 							],
-							"query": [
-								{
-									"key": "id",
-									"value": "a81c2585-5ab6-460c-ae47-782015c1805b"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Fraud Detection and Prevention"
-								},
-								{
-									"key": "IDNumber",
-									"value": ""
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								},
-								{
-									"key": "EnquiryReason",
-									"value": "Test"
-								},
-								{
-									"key": "EnquiryDoneBy",
-									"value": ""
-								},
-								{
-									"key": "AccountNumber",
-									"value": ""
-								},
-								{
-									"key": "FirstName",
-									"value": ""
-								},
-								{
-									"key": "Surname",
-									"value": ""
-								},
-								{
-									"key": "IdentificationType",
-									"value": ""
-								},
-								{
-									"key": "Bank",
-									"value": ""
-								},
-								{
-									"key": "HasConsent",
-									"value": "true"
-								},
-								{
-									"key": "AccountType",
-									"value": "NotKnown"
-								},
-								{
-									"key": "BranchCode",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=fbfdb214-8d5b-417e-b49b-7afb0c0d7b78&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&FirstName=Joseph&MiddleName=&LastName=Kony&MatchType=Exact&Gender=Male&IncludeDeceasedPersons=No",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "fbfdb214-8d5b-417e-b49b-7afb0c0d7b78"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Fraud Detection and Prevention"
-								},
-								{
-									"key": "IDNumber",
-									"value": ""
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								},
-								{
-									"key": "EnquiryReason",
-									"value": "Test"
-								},
-								{
-									"key": "EnquiryDoneBy",
-									"value": ""
-								},
-								{
-									"key": "FirstName",
-									"value": "Joseph"
-								},
-								{
-									"key": "MiddleName",
-									"value": ""
-								},
-								{
-									"key": "LastName",
-									"value": "Kony"
-								},
-								{
-									"key": "MatchType",
-									"value": "Exact"
-								},
-								{
-									"key": "CloseMatchThreshold",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "OriginalScriptName",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "Address",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "Gender",
-									"value": "Male"
-								},
-								{
-									"key": "DateOfBirth",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "IncludeDeceasedPersons",
-									"value": "No"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Company KYC (CIPC Company Check and Director Information)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let inputDirectorList = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
-									"pm.environment.set(\"inputDirectorList\", inputDirectorList);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=0c4fb641-f410-4f2e-b06e-d43ea8a94e54&PermissiblePurpose=Fraud Detection and Prevention&RegistrationNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&CompanyName=",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "0c4fb641-f410-4f2e-b06e-d43ea8a94e54"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Fraud Detection and Prevention"
-								},
-								{
-									"key": "RegistrationNumber",
-									"value": ""
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								},
-								{
-									"key": "EnquiryReason",
-									"value": "Test"
-								},
-								{
-									"key": "EnquiryDoneBy",
-									"value": ""
-								},
-								{
-									"key": "CompanyName",
-									"value": ""
-								},
-								{
-									"key": "InputDirectorList",
-									"value": "{{inputDirectorList}}",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eagle Eye (Pre-Assessment Credit Check Enquiry)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}?id=da065595-12ae-448a-b6ed-818437cbb098&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2",
-							"host": [
-								"{{base_url}}"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "da065595-12ae-448a-b6ed-818437cbb098"
-								},
-								{
-									"key": "PermissiblePurpose",
-									"value": "Admin Purpose"
-								},
-								{
-									"key": "IDNumber",
-									"value": "7707077777087"
-								},
-								{
-									"key": "Reference",
-									"value": "Test"
-								},
-								{
-									"key": "MaxCacheDays",
-									"value": "2"
-								}
+							"path": [
+								"inTouchOrganisation",
+								"organisationPhaseTwoId"
 							]
 						}
 					},
@@ -650,131 +1009,711 @@
 			]
 		},
 		{
-			"name": "Secure Biometric and Identity Document Services",
+			"name": "Intouch Service LIbrary",
 			"item": [
 				{
-					"name": "OCR",
+					"name": "Identity and Onboarding Services Copy",
 					"item": [
 						{
-							"name": "Identity Document Capture and Extract",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "UseV2",
-										"value": "true",
-										"type": "text"
+							"name": "OCR",
+							"item": [
+								{
+									"name": "Identity Document OCR",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "UseV2",
+												"value": "true",
+												"type": "text"
+											},
+											{
+												"key": "DocumentType",
+												"value": "IDCARD",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"FrontImage\": \"\",\n    \"BackImage\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/files?id=abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"files"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322"
+												}
+											]
+										}
 									},
-									{
-										"key": "DocumentType",
-										"value": "IDCARD",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"FrontImage\": \"\",\n    \"BackImage\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/files?id=abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"files"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "abf72fa8-cd6f-46e7-9baf-ba1ea1c2d322"
-										}
-									]
+									"response": []
 								}
-							},
-							"response": []
+							]
+						},
+						{
+							"name": "Face Compare",
+							"item": [
+								{
+									"name": "Compare Images",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"target\": \"\",\n    \"faces\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/files?id=90c11897-f2a1-4e9b-9107-1382ced5490f",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"files"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "90c11897-f2a1-4e9b-9107-1382ced5490f"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Liveness",
+							"item": [
+								{
+									"name": "Passive Liveness Verification",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "UseV3",
+												"value": "true",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"media\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/files?id=37f83569-9db3-4f5a-8303-b56f42a632ca",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"files"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "37f83569-9db3-4f5a-8303-b56f42a632ca"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
 				{
-					"name": "Face Compare",
+					"name": "Secure Data Services",
 					"item": [
 						{
-							"name": "Compare Images (Facial Match)",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
+							"name": "South African Department of Home Affairs Verification + Identity Photo",
 							"request": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"target\": \"\",\n    \"faces\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{base_url}}/files?id=90c11897-f2a1-4e9b-9107-1382ced5490f",
+									"raw": "{{base_url}}?id=bdd053aa-239b-4f4c-96e3-425fc5a165a8&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=",
 									"host": [
 										"{{base_url}}"
-									],
-									"path": [
-										"files"
 									],
 									"query": [
 										{
 											"key": "id",
-											"value": "90c11897-f2a1-4e9b-9107-1382ced5490f"
+											"value": "bdd053aa-239b-4f4c-96e3-425fc5a165a8"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
 										}
 									]
 								}
 							},
 							"response": []
-						}
-					]
-				},
-				{
-					"name": "Liveness",
-					"item": [
+						},
 						{
-							"name": "Selfie Liveness Verification",
+							"name": "Identity Verification via South African Credit Bureaus",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "UseV3",
-										"value": "true",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"media\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
+								"header": [],
 								"url": {
-									"raw": "{{base_url}}/files?id=37f83569-9db3-4f5a-8303-b56f42a632ca",
+									"raw": "{{base_url}}?id=392595a7-8297-4063-98df-4cf831ca0720&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&FirstName=Christopher&Surname=Burger&UsePP=false&UseDHAExtra=No&DOB=1977-07-07",
 									"host": [
 										"{{base_url}}"
-									],
-									"path": [
-										"files"
 									],
 									"query": [
 										{
 											"key": "id",
-											"value": "37f83569-9db3-4f5a-8303-b56f42a632ca"
+											"value": "392595a7-8297-4063-98df-4cf831ca0720"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "FirstName",
+											"value": "Christopher"
+										},
+										{
+											"key": "Surname",
+											"value": "Burger"
+										},
+										{
+											"key": "UsePP",
+											"value": "false"
+										},
+										{
+											"key": "UseDHAExtra",
+											"value": "No"
+										},
+										{
+											"key": "DOB",
+											"value": "1977-07-07"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Best Address -  provides current highest scoring addresses",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=01931fe0-32f8-74b4-812e-c90ab6b57ab3&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&UseRankedScore=True",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "01931fe0-32f8-74b4-812e-c90ab6b57ab3"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "UseRankedScore",
+											"value": "True"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contact-ability (Provides current highest scoring Cell phone and Telephone Numbers)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=9cb441e9-cb3a-456b-b0f4-6d6920c29540&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&AddNames=true&GetOwnerName=true&ShowLinks=true",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "9cb441e9-cb3a-456b-b0f4-6d6920c29540"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "AddNames",
+											"value": "true"
+										},
+										{
+											"key": "GetOwnerName",
+											"value": "true"
+										},
+										{
+											"key": "ShowLinks",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "eKYC Individual – submit identity and existing Address for Verification",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let inputPerson = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
+											"let inputAddress = encodeURIComponent('{\"Line1\": \"Bureau Place\", \"PostCode\": \"2194\"}');",
+											"pm.environment.set(\"inputPerson\", inputPerson);",
+											"pm.environment.set(\"inputAddress\", inputAddress);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=eca10fd3-791d-4d3e-a3a7-b5ca57b67968&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&InputPerson={{inputPerson}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "eca10fd3-791d-4d3e-a3a7-b5ca57b67968"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
+										},
+										{
+											"key": "InputPerson",
+											"value": "{{inputPerson}}",
+											"description": "Value editable in Scripts"
+										},
+										{
+											"key": "InputAddress",
+											"value": "{{inputAddress}}",
+											"description": "Optional, Value editable in Scripts",
+											"disabled": true
+										},
+										{
+											"key": "InputEmail",
+											"value": "",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "InputTelephone",
+											"value": "",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "InputEmployer",
+											"value": "",
+											"description": "Optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "South African Bank Account Verification",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=a81c2585-5ab6-460c-ae47-782015c1805b&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&AccountNumber=&FirstName=&Surname=&IdentificationType=&Bank=&HasConsent=true&AccountType=NotKnown&BranchCode=",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "a81c2585-5ab6-460c-ae47-782015c1805b"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Fraud Detection and Prevention"
+										},
+										{
+											"key": "IDNumber",
+											"value": ""
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
+										},
+										{
+											"key": "AccountNumber",
+											"value": ""
+										},
+										{
+											"key": "FirstName",
+											"value": ""
+										},
+										{
+											"key": "Surname",
+											"value": ""
+										},
+										{
+											"key": "IdentificationType",
+											"value": ""
+										},
+										{
+											"key": "Bank",
+											"value": ""
+										},
+										{
+											"key": "HasConsent",
+											"value": "true"
+										},
+										{
+											"key": "AccountType",
+											"value": "NotKnown"
+										},
+										{
+											"key": "BranchCode",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=fbfdb214-8d5b-417e-b49b-7afb0c0d7b78&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&FirstName=Joseph&MiddleName=&LastName=Kony&MatchType=Exact&Gender=Male&IncludeDeceasedPersons=No",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "fbfdb214-8d5b-417e-b49b-7afb0c0d7b78"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Fraud Detection and Prevention"
+										},
+										{
+											"key": "IDNumber",
+											"value": ""
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
+										},
+										{
+											"key": "FirstName",
+											"value": "Joseph"
+										},
+										{
+											"key": "MiddleName",
+											"value": ""
+										},
+										{
+											"key": "LastName",
+											"value": "Kony"
+										},
+										{
+											"key": "MatchType",
+											"value": "Exact"
+										},
+										{
+											"key": "CloseMatchThreshold",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "OriginalScriptName",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "Address",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "Gender",
+											"value": "Male"
+										},
+										{
+											"key": "DateOfBirth",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "IncludeDeceasedPersons",
+											"value": "No"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Company KYC (CIPC Company Check and Director Information)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let inputDirectorList = encodeURIComponent('{\"IDNumber\": \"7707077777087\", \"FirstName\": \"Christopher\", \"Surname\": \"Burger\"}');",
+											"pm.environment.set(\"inputDirectorList\", inputDirectorList);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=0c4fb641-f410-4f2e-b06e-d43ea8a94e54&PermissiblePurpose=Fraud Detection and Prevention&RegistrationNumber=&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=&CompanyName=",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0c4fb641-f410-4f2e-b06e-d43ea8a94e54"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Fraud Detection and Prevention"
+										},
+										{
+											"key": "RegistrationNumber",
+											"value": ""
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
+										},
+										{
+											"key": "CompanyName",
+											"value": ""
+										},
+										{
+											"key": "InputDirectorList",
+											"value": "{{inputDirectorList}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eagle Eye (Pre-Assessment Credit Check Enquiry)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}?id=da065595-12ae-448a-b6ed-818437cbb098&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "da065595-12ae-448a-b6ed-818437cbb098"
+										},
+										{
+											"key": "PermissiblePurpose",
+											"value": "Admin Purpose"
+										},
+										{
+											"key": "IDNumber",
+											"value": "7707077777087"
+										},
+										{
+											"key": "Reference",
+											"value": "Test"
+										},
+										{
+											"key": "MaxCacheDays",
+											"value": "2"
 										}
 									]
 								}
@@ -816,6 +1755,18 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "injection_url",
+			"value": "https://api.dev.intouch.io/injection/api/v3",
+			"type": "default"
+		},
+		{
+			"key": "org_phase_two_id",
+			"value": "272a8b6c-9660-4d07-97d8-a3741298d516",
+			"type": "default"
 		}
 	]
 }
