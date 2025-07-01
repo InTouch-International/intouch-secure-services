@@ -743,13 +743,13 @@
 			"name": "InTouch Workflow Services",
 			"item": [
 				{
-					"name": "Address List",
+					"name": "eKYC Individual – submit identity and existing Address for Verification",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"Fraud Detection and Prevention\" // default value\n    }\n]",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"InputPerson\",\n        \"value\": \"{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"123456789012\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Test\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Person\\\\\\\"}\" // please adhere to escapes\n    },\n    {\n        \"name\": \"InputAddress\",\n        \"value\": \"{\\\\\\\"Line1\\\\\\\":\\\\\\\"123 Test Street\\\\\\\",\\\\\\\"PostCode\\\\\\\":\\\\\\\"1234\\\\\\\"}\" // please adhere to escapes\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -757,84 +757,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{injection_url}}/initiateWorkflow?workflowId=daaf29ca-3451-4f44-a311-4fa156a41940&organisationPhaseTwoId={{org_phase_two_id}}",
+							"raw": "{{injection_url}}?workflowId=f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be&organisationPhaseTwoId={{org_phase_two_id}}",
 							"host": [
 								"{{injection_url}}"
-							],
-							"path": [
-								"initiateWorkflow"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "daaf29ca-3451-4f44-a311-4fa156a41940"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Contact-ability",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}/initiateWorkflow?workflowId=4166a792-cee9-4350-8de4-c51ffe1919f5&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"path": [
-								"initiateWorkflow"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "4166a792-cee9-4350-8de4-c51ffe1919f5"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "eKYC Individual",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"9103085067083\"\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"Test\"\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"Will be provided on demand\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"Karl Nimmo\"\n    },\n    {\n        \"name\": \"InputPerson\",\n        \"value\": \"{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"9103085067083\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Karl\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Nimmo\\\\\\\"}\" // please adhere to escapes\n    },\n    {\n        \"name\": \"InputAddress\",\n        \"value\": \"{\\\\\\\"Line1\\\\\\\":\\\\\\\"34 Cecil Avenue\\\\\\\",\\\\\\\"PostCode\\\\\\\":\\\\\\\"2196\\\\\\\"}\" // please adhere to escapes\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}/initiateWorkflow?workflowId=f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"path": [
-								"initiateWorkflow"
 							],
 							"query": [
 								{
@@ -844,14 +769,417 @@
 								{
 									"key": "organisationPhaseTwoId",
 									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "South African Department of Home Affairs Verification + Identity Photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=1e733f23-4a9b-4cb9-b565-85df6a4e2e84&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "1e733f23-4a9b-4cb9-b565-85df6a4e2e84"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "South African Department of Home Affairs Verification + Identity Photo and Fallback to Identity Verification via South African Credit Bureaus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=b5b79b3f-6b8f-45d9-b577-94c48bf9187e&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "b5b79b3f-6b8f-45d9-b577-94c48bf9187e"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Best Address -  provides current highest scoring addresses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"UseRankedScore\",\n        \"value\": \"\" //true/false\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=daaf29ca-3451-4f44-a311-4fa156a41940&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "daaf29ca-3451-4f44-a311-4fa156a41940"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eagle Eye (Pre-Assessment Credit Check Enquiry)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=2e856e1c-a874-49c7-b907-1d0c4a4dfe2e&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "2e856e1c-a874-49c7-b907-1d0c4a4dfe2e"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MiddleName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"LastName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Gender\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"CloseMatchThreshold\",\n        \"value\": \"100\"\n    },\n    {\n        \"name\": \"Address\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"270\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MatchType\",\n        \"value\": \"Exact\"\n    },\n    {\n        \"name\": \"IncludeDeceasedPersons\",\n        \"value\": \"No\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=504fc1de-4c71-4e75-902c-4e7cfa545a55&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "504fc1de-4c71-4e75-902c-4e7cfa545a55"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Address List - provides current highest scoring addresses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=6bb1a693-1d80-40ce-9126-09a22ee29aac&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "6bb1a693-1d80-40ce-9126-09a22ee29aac"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "South African Bank Account Verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Surname\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Bank\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AccountType\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"BranchCode\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AccountNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"IdentificationType\",\n        \"value\": \"SAID\"\n    },\n    {\n        \"name\": \"HasConsent\",\n        \"value\": \"true\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=e1c0cb3b-1454-4183-9c3a-e6a0d8141749&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "e1c0cb3b-1454-4183-9c3a-e6a0d8141749"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Identity Verification via South African Credit Bureaus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"DOB\",\n        \"value\": \"\" //YYYY-MM-DD\n    },\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Surname\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"UsePP\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"UseDHAExtra\",\n        \"value\": \"\" //Yes/No\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=93dc566a-2344-4e7f-8218-add8d78ceb44&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "93dc566a-2344-4e7f-8218-add8d78ceb44"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact-ability (Provides current highest scoring Cell phone and Telephone Numbers)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AddNames\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"GetOwnerName\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"ShowLinks\",\n        \"value\": \"\" //true/false\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=4166a792-cee9-4350-8de4-c51ffe1919f5&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "4166a792-cee9-4350-8de4-c51ffe1919f5"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company KYC (CIPC Company Check and Director Information)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"CompanyName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"RegistrationNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"270\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"InputDirectorList\",\n        \"value\": \"[{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"123456789012\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Test\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Person\\\\\\\"}]\" // please adhere to escapes\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{injection_url}}?workflowId=a7f871b9-afa1-4e21-842b-f987b028fcd3&organisationPhaseTwoId={{org_phase_two_id}}",
+							"host": [
+								"{{injection_url}}"
+							],
+							"query": [
+								{
+									"key": "workflowId",
+									"value": "a7f871b9-afa1-4e21-842b-f987b028fcd3"
+								},
+								{
+									"key": "organisationPhaseTwoId",
+									"value": "{{org_phase_two_id}}"
+								},
+								{
+									"key": "webhook",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/status/{{tracking_id}}",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"status",
+								"{{tracking_id}}"
 							]
 						}
 					},
 					"response": []
 				}
 			],
-			"description": "### Workflow Initiation and Tracking\n\n- **Initiation Calls**: Using your Organisation ID, you can initiate any workflow process. These calls generate a `Tracking ID`, which is essential for monitoring the workflow's progress.\n    \n- **Status Checks**: By inputting the `Tracking ID` as a path variable in the status call, you can obtain real-time updates on the workflow. This includes results for each step as they are completed.\n    \n- **Handling Encoded Data**: If a call returns encoded data, the workflow will decode this data and upload the corresponding document or image to a private S3 bucket. You'll receive a document or image URL in your results, equipped with a secure, pre-signed link for access. Note that these links expire after 24 hours for security purposes.\n    \n\n### Environment Variables Collection\n\nThis collection includes crucial configurations, such as:\n\n- **Base URLs**: URLs for authentication, identity services, core services, and workflow initiation.\n    \n- **Authentication Token**: Placeholder for the Bearer token necessary for authenticated calls.\n    \n- **Organisation Phase Two ID**: Identifier used in initiating workflows."
+			"description": "### Workflow Initiation and Tracking\n\n- **Initiation Calls**: Using your Organisation ID, you can initiate any workflow process. These calls generate a `Tracking ID`, which is essential for monitoring the workflow's progress.\n    \n- **Status Checks**: By inputting the `Tracking ID` as a path variable in the status call, you can obtain real-time updates on the workflow. This includes results for each step as they are completed.\n    \n- **Handling Encoded Data**: If a call returns encoded data, the workflow will decode this data and upload the corresponding document or image to a private S3 bucket. You'll receive a document or image URL in your results, equipped with a secure, pre-signed link for access. Note that these links expire after 24 hours for security purposes.\n    \n\nOur Single Automations allow you to process a workflow as described in the collection. The status an results of the automation can be retrived in two ways\n\n- Use the status endpoint with the tracking id to get the status.\n    \n- Pass an optional Request paramater called 'webhook' where we will send you the respond data once complete.\n    \n\n### Environment Variables Collection\n\nThis collection includes crucial configurations, such as:\n\n- **Base URLs**: URLs for authentication, identity services, core services, and workflow initiation.\n    \n- **Authentication Token**: Placeholder for the Bearer token necessary for authenticated calls.\n    \n- **Organisation Phase Two ID**: Identifier used in initiating workflows."
 		},
 		{
 			"name": "Pre-Run File Upload",
@@ -1705,448 +2033,6 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "Initiate Single Automations",
-			"item": [
-				{
-					"name": "eKYC Individual – submit identity and existing Address for Verification",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"InputPerson\",\n        \"value\": \"{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"123456789012\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Test\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Person\\\\\\\"}\" // please adhere to escapes\n    },\n    {\n        \"name\": \"InputAddress\",\n        \"value\": \"{\\\\\\\"Line1\\\\\\\":\\\\\\\"123 Test Street\\\\\\\",\\\\\\\"PostCode\\\\\\\":\\\\\\\"1234\\\\\\\"}\" // please adhere to escapes\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "f4f3e2cf-9dc2-4163-be0e-b7bdb3df44be"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "South African Department of Home Affairs Verification + Identity Photo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=1e733f23-4a9b-4cb9-b565-85df6a4e2e84&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "1e733f23-4a9b-4cb9-b565-85df6a4e2e84"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "South African Department of Home Affairs Verification + Identity Photo and Fallback to Identity Verification via South African Credit Bureaus",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=b5b79b3f-6b8f-45d9-b577-94c48bf9187e&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "b5b79b3f-6b8f-45d9-b577-94c48bf9187e"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Best Address -  provides current highest scoring addresses",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"UseRankedScore\",\n        \"value\": \"\" //true/false\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=daaf29ca-3451-4f44-a311-4fa156a41940&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "daaf29ca-3451-4f44-a311-4fa156a41940"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eagle Eye (Pre-Assessment Credit Check Enquiry)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=2e856e1c-a874-49c7-b907-1d0c4a4dfe2e&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "2e856e1c-a874-49c7-b907-1d0c4a4dfe2e"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MiddleName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"LastName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Gender\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"CloseMatchThreshold\",\n        \"value\": \"100\"\n    },\n    {\n        \"name\": \"Address\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"270\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MatchType\",\n        \"value\": \"Exact\"\n    },\n    {\n        \"name\": \"IncludeDeceasedPersons\",\n        \"value\": \"No\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=504fc1de-4c71-4e75-902c-4e7cfa545a55&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "504fc1de-4c71-4e75-902c-4e7cfa545a55"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Email Address List - provides current highest scoring addresses",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=6bb1a693-1d80-40ce-9126-09a22ee29aac&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "6bb1a693-1d80-40ce-9126-09a22ee29aac"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "South African Bank Account Verification",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Surname\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Bank\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AccountType\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"BranchCode\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AccountNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"IdentificationType\",\n        \"value\": \"SAID\"\n    },\n    {\n        \"name\": \"HasConsent\",\n        \"value\": \"true\"\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=e1c0cb3b-1454-4183-9c3a-e6a0d8141749&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "e1c0cb3b-1454-4183-9c3a-e6a0d8141749"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Identity Verification via South African Credit Bureaus",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"DOB\",\n        \"value\": \"\" //YYYY-MM-DD\n    },\n    {\n        \"name\": \"FirstName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"Surname\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"UsePP\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"UseDHAExtra\",\n        \"value\": \"\" //Yes/No\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=93dc566a-2344-4e7f-8218-add8d78ceb44&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "93dc566a-2344-4e7f-8218-add8d78ceb44"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Contact-ability (Provides current highest scoring Cell phone and Telephone Numbers)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"IDNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"AddNames\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"GetOwnerName\",\n        \"value\": \"\" //true/false\n    },\n    {\n        \"name\": \"ShowLinks\",\n        \"value\": \"\" //true/false\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=4166a792-cee9-4350-8de4-c51ffe1919f5&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "4166a792-cee9-4350-8de4-c51ffe1919f5"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Company KYC (CIPC Company Check and Director Information)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"CompanyName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"RegistrationNumber\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"270\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"InputDirectorList\",\n        \"value\": \"[{\\\\\\\"IDNumber\\\\\\\":\\\\\\\"123456789012\\\\\\\",\\\\\\\"FirstName\\\\\\\":\\\\\\\"Test\\\\\\\",\\\\\\\"Surname\\\\\\\":\\\\\\\"Person\\\\\\\"}]\" // please adhere to escapes\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{injection_url}}?workflowId=a7f871b9-afa1-4e21-842b-f987b028fcd3&organisationPhaseTwoId={{org_phase_two_id}}",
-							"host": [
-								"{{injection_url}}"
-							],
-							"query": [
-								{
-									"key": "workflowId",
-									"value": "a7f871b9-afa1-4e21-842b-f987b028fcd3"
-								},
-								{
-									"key": "organisationPhaseTwoId",
-									"value": "{{org_phase_two_id}}"
-								},
-								{
-									"key": "webhook",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Check Status",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{core_url}}/status/{{tracking_id}}",
-							"host": [
-								"{{core_url}}"
-							],
-							"path": [
-								"status",
-								"{{tracking_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"description": "Our Single Automations allow you to process a workflow as described in the collection. The status an results of the automation can be retrived in two ways\n\n- Use the status endpoint with the tracking id to get the status.\n    \n- Pass an optional Request paramater called 'webhook' where we will send you the respond data once complete."
 		}
 	],
 	"auth": {
