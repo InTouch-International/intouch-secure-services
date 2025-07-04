@@ -18,8 +18,8 @@ Each call within the InTouch Secure Services requires authorisation using a bear
 Upload an image file to retrieve a reusable path to the file. Use the new path in `Identity Document Capture and Extract`, `Compare Images (Facial Match)`, `Selfie Liveness Verification`.
 #### Upload Files
 Upload image files to retrieve reusable paths to the file. Use the new paths in `Identity Document Capture and Extract`, `Compare Images (Facial Match)`, `Selfie Liveness Verification`.
-
-### Secure Data Services
+### Intouch Service LIbrary
+#### Secure Data Services
 - South African Department of Home Affairs Verification + Identity Photo
 - Identity Verification via South African Credit Bureaus
 - Best Address -  provides current highest scoring addresses
@@ -30,10 +30,19 @@ Upload image files to retrieve reusable paths to the file. Use the new paths in 
 - Company KYC (CIPC Company Check and Director Information)
 - Eagle Eye (Pre-Assessment Credit Check Enquiry)
 
-### Secure Biometric and Identity Document Services
+#### Secure Biometric and Identity Document Services
 - Identity Document Capture and Extract
 - Compare Images (Facial Match)
 - Selfie Liveness Verification
+
+  ### InTouch Workflow Services
+ Workflows are a different packaging for the Services Library that will create a corresponding PDF document for the services and in some cases, run fallback mechanisms in case a particular service is unavailable so you don’t experience downtime as a result. 
+
+ The results of which can be queried or sent to  you via a webhook. 
+ 
+  ### InTouch Consent Services
+Consent service allows you to request consent from your end users to run any of the worklows against your customers. By default we will assume you have consent based on legal discussions when onboarded. In cases you dont these endpoints can be leveraged. 
+
 
 ## Setup
 1. Clone the repository to your local machine.
