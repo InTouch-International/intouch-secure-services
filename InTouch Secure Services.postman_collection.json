@@ -1999,18 +1999,18 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}?id=da065595-12ae-448a-b6ed-818437cbb098&PermissiblePurpose=Admin Purpose&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2",
+									"raw": "{{base_url}}?id=01946bdb-f83e-70ef-a0fb-d6505c058ddf&PermissiblePurpose=Fraud Detection and Prevention&IDNumber=7707077777087&Reference=Test&MaxCacheDays=2&EnquiryReason=Test&EnquiryDoneBy=",
 									"host": [
 										"{{base_url}}"
 									],
 									"query": [
 										{
 											"key": "id",
-											"value": "da065595-12ae-448a-b6ed-818437cbb098"
+											"value": "01946bdb-f83e-70ef-a0fb-d6505c058ddf"
 										},
 										{
 											"key": "PermissiblePurpose",
-											"value": "Admin Purpose"
+											"value": "Fraud Detection and Prevention"
 										},
 										{
 											"key": "IDNumber",
@@ -2023,6 +2023,14 @@
 										{
 											"key": "MaxCacheDays",
 											"value": "2"
+										},
+										{
+											"key": "EnquiryReason",
+											"value": "Test"
+										},
+										{
+											"key": "EnquiryDoneBy",
+											"value": ""
 										}
 									]
 								}
