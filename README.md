@@ -27,6 +27,7 @@ Upload image files to retrieve reusable paths to the file. Use the new paths in 
 - eKYC Individual – submit identity and existing Address for Verification
 - South African Bank Account Verification
 - Combined AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)
+- Combined Company AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)
 - Company KYC (CIPC Company Check and Director Information)
 - Eagle Eye (Pre-Assessment Credit Check Enquiry)
 
