@@ -970,6 +970,44 @@
 					},
 					"response": []
 				},
+		        {
+		          "name": "Combined Company AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
+		          "request": {
+		            "method": "POST",
+		            "header": [],
+		            "body": {
+		              "mode": "raw",
+		              "raw": "[\n    {\n        \"name\": \"CompanyName\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"PermissiblePurpose\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"EnquiryReason\",\n        \"value\": \"\" //Default: Fraud Detection and Prevention\n    },\n    {\n        \"name\": \"Reference\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MaxCacheDays\",\n        \"value\": \"270\"\n    },\n    {\n        \"name\": \"EnquiryDoneBy\",\n        \"value\": \"\"\n    },\n    {\n        \"name\": \"MatchType\",\n        \"value\": \"Exact\"\n    }\n]",
+		              "options": {
+		                "raw": {
+		                  "language": "json"
+		                }
+		              }
+		            },
+		            "url": {
+		              "raw": "{{injection_url}}?workflowId=d19f8f14-cf00-4cb7-8978-523a41b3a99e&organisationPhaseTwoId={{org_phase_two_id}}",
+		              "host": [
+		                "{{injection_url}}"
+		              ],
+		              "query": [
+		                {
+		                  "key": "workflowId",
+		                  "value": "d19f8f14-cf00-4cb7-8978-523a41b3a99e"
+		                },
+		                {
+		                  "key": "organisationPhaseTwoId",
+		                  "value": "{{org_phase_two_id}}"
+		                },
+		                {
+		                  "key": "webhook",
+		                  "value": "",
+		                  "disabled": true
+		                }
+		              ]
+		            }
+		          },
+		          "response": []
+		        },
 				{
 					"name": "Email Address List - provides current highest scoring addresses",
 					"request": {
@@ -1854,7 +1892,7 @@
 										},
 										{
 											"key": "Reference",
-											"value": "Test"
+											"value": ""
 										},
 										{
 											"key": "MaxCacheDays",
@@ -1862,7 +1900,7 @@
 										},
 										{
 											"key": "EnquiryReason",
-											"value": "Test"
+											"value": ""
 										},
 										{
 											"key": "EnquiryDoneBy",
@@ -1870,7 +1908,7 @@
 										},
 										{
 											"key": "FirstName",
-											"value": "Joseph"
+											"value": ""
 										},
 										{
 											"key": "MiddleName",
@@ -1878,7 +1916,7 @@
 										},
 										{
 											"key": "LastName",
-											"value": "Kony"
+											"value": ""
 										},
 										{
 											"key": "MatchType",
@@ -1901,7 +1939,7 @@
 										},
 										{
 											"key": "Gender",
-											"value": "Male"
+											"value": ""
 										},
 										{
 											"key": "DateOfBirth",
@@ -1917,6 +1955,74 @@
 							},
 							"response": []
 						},
+			            {
+			              "name": "Combined Company AML Check (Sanctions Screening/PEPS/Crimelists/Watchlists/Adverse Media Verification)",
+			              "request": {
+			                "auth": {
+			                  "type": "bearer",
+			                  "bearer": [
+			                    {
+			                      "key": "token",
+			                      "value": "{{token}}",
+			                      "type": "string"
+			                    }
+			                  ]
+			                },
+			                "method": "POST",
+			                "header": [],
+			                "url": {
+			                  "raw": "{{base_url}}?id=c3f17a81-b175-4818-9708-e0952e7f7f6f&PermissiblePurpose=Fraud Detection and Prevention&Reference=&MaxCacheDays=2&EnquiryReason=&EnquiryDoneBy=&CompanyName=&MatchType=Exact",
+			                  "host": [
+			                    "{{base_url}}"
+			                  ],
+			                  "query": [
+			                    {
+			                      "key": "id",
+			                      "value": "c3f17a81-b175-4818-9708-e0952e7f7f6f"
+			                    },
+			                    {
+			                      "key": "PermissiblePurpose",
+			                      "value": "Fraud Detection and Prevention"
+			                    },
+			                    {
+			                      "key": "Reference",
+			                      "value": ""
+			                    },
+			                    {
+			                      "key": "MaxCacheDays",
+			                      "value": "2"
+			                    },
+			                    {
+			                      "key": "EnquiryReason",
+			                      "value": ""
+			                    },
+			                    {
+			                      "key": "EnquiryDoneBy",
+			                      "value": ""
+			                    },
+			                    {
+			                      "key": "CompanyName",
+			                      "value": ""
+			                    },
+			                    {
+			                      "key": "MatchType",
+			                      "value": "Exact"
+			                    },
+			                    {
+			                      "key": "CloseMatchThreshold",
+			                      "value": "",
+			                      "disabled": true
+			                    },
+			                    {
+			                      "key": "Address",
+			                      "value": "",
+			                      "disabled": true
+			                    }
+			                  ]
+			                }
+			              },
+			              "response": []
+			            },
 						{
 							"name": "Company KYC (CIPC Company Check and Director Information)",
 							"event": [
